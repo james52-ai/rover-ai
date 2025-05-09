@@ -11,11 +11,18 @@ def processar():
     dados = request.json
     print("Recebido:", dados)
 
-    # Regras simples de IA
-    if dados.get("distancia_frente", 1000) < 200:
+    # IA simples com base nos sensores
+    linha = dados.get("linha", 1)
+    distancia_frente = dados.get("distancia_frente", 999)
+    cor = dados.get("cor", "desconhecida")
+
+    # Decisão baseada em regras
+    if distancia_frente < 200:
         acao = "parar"
-    elif dados.get("linha", 1) == 0:
+    elif linha == 0:
         acao = "ajustar_rota"
+    elif cor == "vermelho":
+        acao = "desviar"
     else:
         acao = "seguir"
 
