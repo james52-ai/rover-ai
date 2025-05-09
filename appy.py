@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import os
 
 app = Flask(__name__)
 
@@ -27,3 +28,7 @@ def processar():
         acao = "seguir"
 
     return jsonify({"acao": acao})
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))  # Render define PORT automaticamente
+    app.run(host="0.0.0.0", port=port)
